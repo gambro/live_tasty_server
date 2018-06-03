@@ -32,7 +32,7 @@ development:
   username: live_tasty_server
 
   # The password associated with the postgres role (username).
-  password: live_tasty-server
+  password: live_tasty_server
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
