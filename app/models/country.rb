@@ -10,8 +10,8 @@
 
 class Country < ApplicationRecord
   has_many :dishes, dependent: :destroy
-  has_one :meta, as: :metables
   has_many :images, as: :imagable
+  has_one :meta_entity, as: :entitable
 
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false },

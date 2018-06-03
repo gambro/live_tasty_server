@@ -1,0 +1,32 @@
+# == Schema Information
+#
+# Table name: meta_entities
+#
+#  id             :bigint(8)        not null, primary key
+#  title          :string
+#  description    :string
+#  keywords       :text
+#  alias          :string
+#  entitable_type :string
+#  entitable_id   :bigint(8)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: 
+  description: 
+  keywords: 
+  alias: 
+  entitable: one
+  entitable_type: Entitable
+
+two:
+  title: 
+  description: 
+  keywords: 
+  alias: 
+  entitable: two
+  entitable_type: Entitable

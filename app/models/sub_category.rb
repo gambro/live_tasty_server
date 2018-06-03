@@ -11,9 +11,9 @@
 
 class SubCategory < ApplicationRecord
   belongs_to :category
-  has_one :meta, as: :metables
   has_many :images, as: :imagable
   has_many :dishes, as: :dishable
+  has_one :meta_entity, as: :entitable
 
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false },

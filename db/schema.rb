@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180603173036) do
+ActiveRecord::Schema.define(version: 20180603183045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,16 +80,16 @@ ActiveRecord::Schema.define(version: 20180603173036) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "meta", force: :cascade do |t|
-    t.string "title", default: "", null: false
-    t.string "description", default: "", null: false
-    t.text "keywords", default: "", null: false
-    t.string "alias", default: "", null: false
-    t.string "metables_type"
-    t.bigint "metables_id"
+  create_table "meta_entities", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.text "keywords"
+    t.string "alias"
+    t.string "entitable_type"
+    t.bigint "entitable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["metables_type", "metables_id"], name: "index_meta_on_metables_type_and_metables_id"
+    t.index ["entitable_type", "entitable_id"], name: "index_meta_entities_on_entitable_type_and_entitable_id"
   end
 
   create_table "sub_categories", force: :cascade do |t|

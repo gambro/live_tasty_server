@@ -58,6 +58,8 @@ development:
 test:
   <<: *default
   database: live_tasty_server_test
+  username: live_tasty_server
+  password: live_tasty_server
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is

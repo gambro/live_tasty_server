@@ -18,8 +18,8 @@ class Dish < ApplicationRecord
   has_many :dish_details, dependent: :destroy
   has_many :ingredients, through: :dish_details, dependent: :destroy
   has_and_belongs_to_many :labels, -> { distinct }
-  has_one :meta, as: :metables
   has_many :images, as: :imagable
+  has_one :meta_entity, as: :entitable
 
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false },
