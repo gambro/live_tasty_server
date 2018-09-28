@@ -83,7 +83,7 @@ end
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "/root/config/database.yml", "/root/config/secrets.yml"
+append :linked_files, "/root/live_tasty_server/config/database.yml", "/root/live_tasty_server/config/secrets.yml"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
