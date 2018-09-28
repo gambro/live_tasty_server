@@ -2,7 +2,7 @@
 # lock "3.9.0"
 
 set :application, "live_tasty_server"
-set :repo_url, "git@egithub.com:gambro/live_tasty_server.git"
+set :repo_url, "git@github.com:gambro/live_tasty_server.git"
 set :rvm_ruby_version, '2.4.0'
 set :puma_threads, [4, 16]
 set :puma_workers, 0
