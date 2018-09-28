@@ -4,29 +4,39 @@
 set :application, "live_tasty_server"
 set :repo_url, "git@github.com:gambro/live_tasty_server.git"
 set :rvm_ruby_version, '2.4.0'
-set :puma_threads, [4, 16]
-set :puma_workers, 0
-set :use_sudo,        true
+# Don't change these unless you know what you're doing
+set :pty,             true
+set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/root/#{fetch(:user)}#{fetch(:application)}"
-set :puma_bind,       "unix://#{fetch(:application)}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "/root/#{fetch(:application)}/tmp/pids/puma.state"
-set :puma_pid,        "/root/#{fetch(:application)}/tmp/pids/puma.pid"
-set :puma_access_log, "/root/#{fetch(:application)}/log/puma.error.log"
-set :puma_error_log,  "/root/#{fetch(:application)}/log/puma.access.log"
+set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
+set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
+set :puma_access_log, "#{release_path}/log/puma.error.log"
+set :puma_error_log,  "#{release_path}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-set :branch, "master"
+
+## Defaults:
+# set :scm,           :git
+# set :branch,        :master
+# set :format,        :pretty
+# set :log_level,     :debug
+# set :keep_releases, 5
+
+## Linked Files & Directories (Default None):
+# set :linked_files, %w{config/database.yml}
+# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
     on roles(:app) do
-      execute "mkdir /root/#{fetch(:application)}/tmp/sockets -p"
-      execute "mkdir /root/#{fetch(:application)}/tmp/pids -p"
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
     end
   end
 
@@ -83,7 +93,7 @@ end
 set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, "/root/live_tasty_server/config/database.yml", "/root/live_tasty_server/config/secrets.yml"
+append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
