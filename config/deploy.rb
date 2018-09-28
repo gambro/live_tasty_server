@@ -9,12 +9,12 @@ set :puma_workers, 0
 set :use_sudo,        false
 set :stage,           :production
 set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}#{fetch(:application)}"
+set :deploy_to,       "/root/#{fetch(:user)}#{fetch(:application)}"
 set :puma_bind,       "unix://#{fetch(:application)}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{fetch(:application)}/tmp/pids/puma.state"
-set :puma_pid,        "#{fetch(:application)}/tmp/pids/puma.pid"
-set :puma_access_log, "#{fetch(:application)}/log/puma.error.log"
-set :puma_error_log,  "#{fetch(:application)}/log/puma.access.log"
+set :puma_state,      "/root/#{fetch(:application)}/tmp/pids/puma.state"
+set :puma_pid,        "/root/#{fetch(:application)}/tmp/pids/puma.pid"
+set :puma_access_log, "/root/#{fetch(:application)}/log/puma.error.log"
+set :puma_error_log,  "/root/#{fetch(:application)}/log/puma.access.log"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
@@ -25,8 +25,8 @@ namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
     on roles(:app) do
-      execute "mkdir #{fetch(:application)}/tmp/sockets -p"
-      execute "mkdir #{fetch(:application)}/tmp/pids -p"
+      execute "mkdir /root/#{fetch(:application)}/tmp/sockets -p"
+      execute "mkdir /root/#{fetch(:application)}/tmp/pids -p"
     end
   end
 
